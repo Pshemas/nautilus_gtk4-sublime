@@ -16,3 +16,5 @@ First of all - by adding a simple loop it should be possible to handle  opening 
 Secondly - handling of opening either in new window or in the last used one could be added (by passing -wm option to command that launches Sublime).
 
 Lastly - even at this super cobbled together stage it is obvious that a small refactor to eliminate code duplication wouldn't hurt ;) .
+
+Shoutout to JakeDane from Gnome forums for links and explanations.
