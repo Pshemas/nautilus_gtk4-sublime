@@ -1,6 +1,6 @@
 from gi.repository import Nautilus, GObject
 from typing import List
-import os
+from subprocess import Popen
 
 
 class TestExtension(GObject.GObject, Nautilus.MenuProvider):
@@ -12,8 +12,12 @@ class TestExtension(GObject.GObject, Nautilus.MenuProvider):
         file: Nautilus.FileInfo,
     ) -> None:
         """Launch single file / directory in Sublime Text"""
-        launch_cmd = f'subl "{file.get_location().get_path()}"'
-        os.system(launch_cmd)
+        LAUNCH_CMD = "subl"
+        filepath = file.get_location().get_path()
+        _ = Popen(
+            [LAUNCH_CMD] + [filepath],
+            start_new_session=True,
+        )
 
     # when right clicking with some objects selected
     def get_file_items(self, files: List[Nautilus.FileInfo]):
