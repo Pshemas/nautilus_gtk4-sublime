@@ -3,7 +3,7 @@ from typing import List
 from subprocess import Popen
 
 
-class TestExtension(GObject.GObject, Nautilus.MenuProvider):
+class SublimeTextOpenExtension(GObject.GObject, Nautilus.MenuProvider):
     """'Open in Sublime Text' menu entries for Nautilus"""
 
     def launch_sublime(
