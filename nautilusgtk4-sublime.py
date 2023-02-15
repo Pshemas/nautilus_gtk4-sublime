@@ -21,24 +21,24 @@ class SublimeTextOpenExtension(GObject.GObject, Nautilus.MenuProvider):
 
     # when right clicking with some objects selected
     def get_file_items(self, files: List[Nautilus.FileInfo]):
+        if files:
+            file = files[0]
 
-        file = files[0]
+            if file.is_directory():
+                item_label = "/%s/" % file.get_name()
+            else:
+                item_label = file.get_name()
 
-        if file.is_directory():
-            item_label = "/%s/" % file.get_name()
-        else:
-            item_label = file.get_name()
+            item = Nautilus.MenuItem(
+                name="Open in SublimeText",
+                label="Open in ST: %s" % item_label,
+                tip="Opens %s in SublimeText." % item_label,
+            )
+            item.connect("activate", self.launch_sublime, file)
 
-        item = Nautilus.MenuItem(
-            name="Open in SublimeText",
-            label="Open in ST: %s" % item_label,
-            tip="Opens %s in SublimeText." % item_label,
-        )
-        item.connect("activate", self.launch_sublime, file)
-
-        return [
-            item,
-        ]
+            return [
+                item,
+            ]
 
     # when right clicking on the empty space
     def get_background_items(self, *args):
